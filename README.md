@@ -33,4 +33,16 @@ Server will run at: http://127.0.0.1:8000
 
 - **GET `/users/{id}`** – Get a user by ID. Returns user JSON.
 
+## Run Tests
+```bash
+pytest tests/ --verbose
+```
+**Tests covers:** Health check endpoint, User creation and retrieval 
+
+## CI - CD
+A GitHub Actions workflow is included to automatically run tests on each commit.
+
+Workflow file: .github/workflows/ci-cd-pipeline.yml
+
+Triggered on: push and pull_request events
 
