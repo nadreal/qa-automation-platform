@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routes import users, admin
+from .routes import admin, users
 
 app = FastAPI(title="QA Automation Demo API")
 
