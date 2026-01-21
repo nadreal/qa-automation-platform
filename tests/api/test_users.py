@@ -1,31 +1,12 @@
 import pytest
-from fastapi.testclient import TestClient
-from backend.app.main import app
 
-@pytest.fixture
-def client():
-    return TestClient(app)
-
-@pytest.mark.api
-def test_health(client):
-    response = client.get("/health")
-    assert response.status_code == 200
-    assert response.json() == {"status": "ok"}
-    
 @pytest.mark.api
 def test_create_user(client):    
     user_data = {"id": 1, "name": "Stevan", "role": "user"}
     response = client.post("/users/", json=user_data)
     assert response.status_code == 201
     assert response.json() == user_data
-    
-@pytest.mark.api
-def test_get_user(client):    
-    user_data = {"id": 1, "name": "Stevan", "role": "user"}
-    response = client.get("/users/1")
-    assert response.status_code == 200
-    assert response.json() == user_data
-
+   
 @pytest.mark.api
 def test_list_users(client):
     client.post("/users/", json={"id": 3, "name": "Nidza", "role": "admin"})
@@ -38,6 +19,14 @@ def test_delete_user(client):
     client.post("/users/", json={"id": 4, "name": "Ivan", "role": "user"})
     r = client.delete("/users/4")
     assert r.status_code == 204
+    
+@pytest.mark.api
+def test_get_user(client):    
+    user_data = {"id": 1, "name": "Stevan", "role": "user"}
+    response = client.post("/users/", json=user_data)
+    response = client.get("/users/1")
+    assert response.status_code == 200
+    assert response.json() == user_data
     
 @pytest.mark.api_negative
 def test_get_missing_user(client):

@@ -29,5 +29,5 @@ jobs:
       - name: Run tests
         run: |
           export PYTHONPATH=$PWD
-          pytest tests/ --verbose
+          pytest tests/ --cov=backend --cov-report=term-missing
 

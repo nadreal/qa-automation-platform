@@ -46,3 +46,14 @@ Workflow file: .github/workflows/ci-cd-pipeline.yml
 
 Triggered on: push and pull_request events
 
+## Architecture Overview
+
+The backend follows a simple service abstraction pattern.
+Business logic is isolated behind a `UserService` interface.
+Currently, an in-memory implementation (`UserServiceMemory`) is used for
+both API execution and automated tests.
+
+This allows:
+- deterministic and fast tests
+- no external dependencies
+- easy replacement with a database-backed service in the future
